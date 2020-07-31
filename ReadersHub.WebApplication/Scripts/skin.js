@@ -1,0 +1,1 @@
+var firm = "Allianz";

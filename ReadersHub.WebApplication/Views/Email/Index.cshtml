@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ReadersHub.WebApplication.Models.EmailViewModel
+
+<h1>Mailing</h1>
+<h5 class="text-muted">Sipariş geçen müşterilerinize bu ekran üzerinden mail gönderebilirsiniz.</h5>
+<hr />
+
+<form class="form-inline margin-bottom-20">
+    @Html.DropDownListFor(x => x.StoreId, Model.StoreList, "Mağaza Seçiniz", new { @class = "form-control" })
+    <button id="storeSubmit" type="button" class="btn btn-primary">Seç</button>
+</form>
+
+@if (Model.StoreId > 0)
+{
+    using (Html.BeginForm("Upload", "Email", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(x => x.StoreId)
+        <div class="pullnone full-width margin-bottom-20">
+            <input type="file" name="UploadedFile" class="margin-bottom-20" />
+            <button class="btn btn-sm btn-primary "><i class="fa fa-plus"></i> Ekle</button>
+            @*<button class="btn btn-sm btn-success"><i class="fa fa-check"></i> Güncelle</button>*@
+        </div>
+    }
+}
+
+
+@section SubScript{
+}

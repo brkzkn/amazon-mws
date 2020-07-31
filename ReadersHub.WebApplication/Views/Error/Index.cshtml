@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<style>
+    body,
+    html {
+        display: table;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        background: #3B5998;
+    }
+
+    div.error-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+        font-family: Trebuchet MS, Tahoma;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+        div.error-wrapper > div {
+            border-top: 5px solid #738BBF;
+            background-color: white;
+            padding: 2% 3%;
+            width: 94%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+            div.error-wrapper > div > img {
+                position: absolute;
+                top: -50px;
+                left: -10px;
+            }
+
+            div.error-wrapper > div > i.fa {
+                background-color: #e74c3c;
+                display: table;
+                color: white;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                text-align: center;
+                line-height: 50px;
+                border-radius: 100%;
+                position: absolute;
+                right: 0;
+                top: -28px;
+            }
+</style>
+@{
+    var errorInfo = TempData["__errorInfo"] as ReadersHub.WebApplication.Core.ErrorInfo;
+
+}
+<div class="error-wrapper">
+    <div>
+        <i class="fa fa-exclamation-triangle"></i>
+        @*<img src="~/Images/logo.jpg" height="40" />*@
+        <p><b class="text-danger">Bir Hata Oluştu</b></p>
+        <p>@errorInfo.StatusCode</p>
+        <p>@errorInfo.Exception.ToString()</p>
+        <a href="@Url.Action("Index","Product")" class="btn btn-sm btn-danger">Ana Sayfaya Git</a>
+    </div>
+</div>

@@ -1,0 +1,359 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ReadersHub.WebApplication.Models.ProductViewModel
+
+<h1>Ürünler</h1>
+<h5 class="text-muted">Ürünlerinizi bu ekran üzerinden yönetebilirsiniz.</h5>
+<hr />
+
+<form class="form-inline margin-bottom-20">
+    @Html.DropDownListFor(x => x.StoreId, Model.StoreList, "Mağaza Seçiniz", new { @class = "form-control" })
+    <button id="storeSubmit" type="button" class="btn btn-primary">Seç</button>
+</form>
+
+@if (Model.StoreId > 0)
+{
+    using (Html.BeginForm("Upload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(x => x.StoreId)
+        <div class="pullnone full-width margin-bottom-20">
+            <input type="file" name="UploadedFile" class="margin-bottom-20" />
+            <button class="btn btn-sm btn-primary "><i class="fa fa-plus"></i> Ekle</button>
+            @*<button class="btn btn-sm btn-success"><i class="fa fa-check"></i> Güncelle</button>*@
+        </div>
+    }
+
+    <div id="divGrid">
+        @{
+            Html.RenderPartial("_Grid");
+        }
+    </div>
+
+    @Popup.Create(new ReadersHub.WebApplication.App_Code.PopupInitialize()
+{
+    ModalSize = "modal-lg",
+    Id = "editProduct",
+    Title = "Ürün Güncelleme",
+    AddButton = "Güncelle",
+    OnClick = "EditProduct(this); return false;"
+})
+
+            }
+
+
+@section SubScript{
+    <script src="~/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$("#bs-example-navbar-collapse-1").load("menubar.html");
+            $('[data-toggle="tooltip"]').tooltip();
+            var isRender = @((Model.StoreId > 0).ToString().ToLower());
+
+            $('#userRoles').multiSelect({
+                selectableHeader: "<div class='custom-header'>Tüm Ekranlar</div>",
+                selectionHeader: "<div class='custom-header'>Girebileceği Ekranlar</div>",
+            });
+
+            var columnDef = [
+                //{
+                //    "targets": 0,
+                //    "data": "IsbnName",
+                //},
+                {
+                    "targets": 0,
+                    "data": "Isbn",
+                },
+                {
+                    "targets": 1,
+                    "data": "Asin",
+                },
+                {
+                    "targets": 2,
+                    "data": "IsbnUsedPriceDollar",
+                    "searchable": false,
+                    "mRender": function (data, type, full) {
+                        var priceValue = '-';
+                        if (data != null) {
+                            priceValue = parseFloat(data);
+                        }
+
+                        var checkValue = '';
+                        if (full.IsFixedUsedDollar) {
+                            checkValue = 'checked';
+                        }
+
+                        return '<div class="form-group inline-right-margin">' +
+                                    '<div class="input-group input-group-sm">' +
+                                        '<input id="_'+full.Id+'_UsedDollarValue"  type="text" class="form-control" value="'+ priceValue+'">' +
+                                        '<span class="input-group-addon">'+
+                                            '<div class="checkbox" style="height: 17px;">'+
+                                                '<label><input id="_'+full.Id+'_UsedDollar" type="checkbox" '+checkValue+' value=""> Sabitle</label>'+
+                                            '</div>'+
+                                        '</span>'+
+                                    '</div>'+
+                                '</div>';
+                    }
+                },
+                {
+                    "targets": 3,
+                    "data": "IsbnNewPriceDollar",
+                    "searchable": false,
+                    "mRender": function (data, type, full) {
+                        var priceValue = '-';
+                        if (data != null) {
+                            priceValue = parseFloat(data);
+                        }
+
+                        var checkValue = '';
+                        if (full.IsFixedNewDollar) {
+                            checkValue = 'checked';
+                        }
+
+                        return '<div class="form-group inline-right-margin">' +
+                                    '<div class="input-group input-group-sm">' +
+                                        '<input id="_'+full.Id+'_NewDollarValue" type="text" class="form-control" value="'+ priceValue+'">' +
+                                        '<span class="input-group-addon">'+
+                                            '<div class="checkbox" style="height: 17px;">'+
+                                                '<label><input id="_'+full.Id+'_NewDollar" type="checkbox" '+checkValue+' value=""> Sabitle</label>'+
+                                            '</div>'+
+                                        '</span>'+
+                                    '</div>'+
+                                '</div>';
+                    }
+                },
+                {
+                    "targets": 4,
+                    "data": "IsbnUsedPricePound",
+                    "searchable": false,
+                    "mRender": function (data, type, full) {
+                        var priceValue = '-';
+                        if (data != null) {
+                            priceValue = parseFloat(data);
+                        }
+                        
+                        var checkValue = '';
+                        if (full.IsFixedUsedPound) {
+                            checkValue = 'checked';
+                        }
+
+                        return '<div class="form-group inline-right-margin">' +
+                                    '<div class="input-group input-group-sm">' +
+                                        '<input id="_'+full.Id+'_UsedPoundValue" type="text" class="form-control" value="'+ priceValue+'">' +
+                                        '<span class="input-group-addon">'+
+                                            '<div class="checkbox" style="height: 17px;">'+
+                                                '<label><input id="_'+full.Id+'_UsedPound" type="checkbox" '+checkValue+' value=""> Sabitle</label>'+
+                                            '</div>'+
+                                        '</span>'+
+                                    '</div>'+
+                                '</div>';
+                    }
+                },
+                {
+                    "targets": 5,
+                    "data": "IsbnNewPricePound",
+                    "searchable": false,
+                    "mRender": function (data, type, full) {
+                        var priceValue = '-';
+                        if (data != null) {
+                            priceValue = parseFloat(data);
+                        }
+                        debugger;
+                        var checkValue = '';
+                        if (full.IsFixedNewPound) {
+                            checkValue = 'checked';
+                        }
+
+                        return '<div class="form-group inline-right-margin">' +
+                                    '<div class="input-group input-group-sm">' +
+                                        '<input id="_'+full.Id+'_NewPoundValue" type="text" class="form-control" value="'+ priceValue+'">' +
+                                        '<span class="input-group-addon">'+
+                                            '<div class="checkbox" style="height: 17px;">'+
+                                                '<label><input id="_'+full.Id+'_NewPound" type="checkbox" '+checkValue+' value=""> Sabitle</label>'+
+                                            '</div>'+
+                                        '</span>'+
+                                    '</div>'+
+                                '</div>';
+                    }
+                },
+                {
+                    "targets": 6,
+                    "data": "AsinUsedPriceDollar",
+                    "searchable": false,
+                },
+                {
+                    "targets": 7,
+                    "data": "AsinNewPriceDollar",
+                    "searchable": false,
+                },
+                {
+                    "targets": 8,
+                    "data": "AsinUsedPricePound",
+                    "searchable": false,
+                },
+                {
+                    "targets": 9,
+                    "data": "AsinNewPricePound",
+                    "searchable": false,
+                },
+                {
+                    "aTargets": -1,
+                    "data": "Id",
+                    "searchable": false,
+                    "mRender": function (data, type, full) {
+                        return '<div style="text-align:center;"> ' +
+                            '<button type="button" onclick="Apply(' + data + '); return false;"; class="btn btn-circle btn-xs" data-toggle="modal" data-placement="left" title="Düzenle"><i class="fa fa-check-circle-o"></i></button> ' +
+                            '<button type="button" onclick="Edit(' + data + '); return false;"; class="btn btn-circle btn-xs" data-toggle="modal" data-placement="left" title="Düzenle"><i class="fa fa-pencil"></i></button> ' +
+                            '</div>';
+                    }
+                }
+            ];
+
+            var gridSettings = {
+                "aoColumnDefs": columnDef,
+                bFilter: true,
+                "drawCallback": function (settings, json) {
+                    console.log('drawCallback');
+                }
+            };
+
+            if (isRender) {
+                _21stSolution.Grid.Render('bookGrid', '@Url.Action("GetList", new { storeId = Model.StoreId })', OnError, gridSettings);
+            }
+
+            function OnError(eInfo) {
+                _21stSolution.Notification.ShowErrorMessage('notification', eInfo.responseJSON.Message);
+            }
+
+            $("#storeSubmit").click(function () {
+                var storeId = $("#StoreId").val();
+                _21stSolution.Notification.Clear();
+                var url = "@Url.Action("Index", "Product")" + "?storeId="+storeId;
+                window.location.href = url;
+            });
+        });
+
+        function Edit(id) {
+            var $modal = $('#editProduct');
+
+            $.ajax({
+                type: "GET",
+                data: { id: id },
+                url: "@Url.Action("Edit", "Product")",
+                datatype: "html",
+                success: function (data) {
+                    $modal.find('.modal-body').html(data);
+                    $modal.modal('show');
+                },
+                error: function () {
+                    $modal.find('.modal-body').html('Veri yüklenemedi');
+                    $modal.modal('show');
+                }
+            });
+        }
+
+        function EditProduct(e) {
+            var url = '@Url.Action("Edit")';
+            PostForm(url, 'productForm');
+        }
+
+        function PostForm(url, form) {
+            var $form;
+
+            if (form != null && form.selector == "form") {
+                $form = form;
+            }
+            else {
+                $form = $('#productForm');
+            }
+
+            if (!$form.valid()) {
+                return false;
+            }
+
+            var data = _21stSolution.GetFormPostJsonDataFromControl($form);
+            _21stSolution.Notification.Clear('notification');
+
+
+            _21stSolution.core.ajax.post(url, {
+                data: data,
+                success: function (resultObj) {
+                    if (resultObj.RedirectUrl != null && resultObj.RedirectUrl.length > 0) {
+                        window.location.href = resultObj.RedirectUrl;
+                    }
+                    if (resultObj.Message != null) {
+                        _21stSolution.Notification.ShowSuccessMessage('notification', resultObj.Message);
+                    }
+
+                    _21stSolution.Grid.Refresh('bookGrid');
+                },
+                error: function (resultObj) {
+                    if (resultObj.Message != null) {
+                        _21stSolution.Notification.ShowErrorMessage('notification', resultObj.Message);
+                    }
+                },
+                preventDefaultSuccess: true,
+                preventDefaultError: true,
+            });
+
+            var $modal = $('#editProduct');
+            $modal.modal('toggle');
+
+            return false;
+        }
+
+        function handleClick(cb) {
+            debugger;
+        }
+
+        function Apply(id){
+
+            _21stSolution.Messaging.ShowConfirm('Ürün fiyatlarını güncellemek istediğinize emin misiniz?', function () { ApprovePrice(id) }, null);
+        }
+
+        function ApprovePrice(id){
+            console.log('Deneme: '+id);
+            var isFixedNewPound = $("#_"+id+"_NewPound").prop('checked');
+            var isFixedUsedPound = $("#_"+id+"_UsedPound").prop('checked');
+            var isFixedNewDollar = $("#_"+id+"_NewDollar").prop('checked');
+            var isFixedUsedDollar = $("#_"+id+"_UsedDollar").prop('checked');
+            var minNewIsbnPricePound = parseFloat($("#_"+id+"_NewPoundValue").val()).toFixed(2);
+            var minUsedIsbnPricePound =parseFloat( $("#_"+id+"_UsedPoundValue").val());
+            var minNewIsbnPriceDollar = $("#_"+id+"_NewDollarValue").val();
+            var minUsedIsbnPriceDollar = $("#_"+id+"_UsedDollarValue").val();
+            var productId = id;
+            var storeId = parseInt('@Model.StoreId');
+            debugger;
+            var formData = { storeId: storeId,
+                productId: productId,
+                isFixedNewDollar: isFixedNewDollar,
+                isFixedUsedDollar:isFixedUsedDollar,
+                isFixedNewPound: isFixedNewPound,
+                isFixedUsedPound: isFixedUsedPound,
+                minNewIsbnPriceDollar: minNewIsbnPriceDollar,
+                minUsedIsbnPriceDollar: parseFloat(minUsedIsbnPriceDollar),
+                minNewIsbnPricePound: minNewIsbnPricePound,
+                minUsedIsbnPricePound:parseFloat(minUsedIsbnPricePound)
+            };
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("UpdatePrice")",
+                data: formData,
+                datatype: "html",
+                success: function (data) {
+                    _21stSolution.Grid.Refresh('bookGrid');
+                    _21stSolution.Messaging.ShowSuccess('Fiyat güncellendi');
+                },
+                error: function (eInfo) {
+                   // _21stSolution.Notification.ShowErrorMessage('notification', eInfo.responseJSON.Message);
+                }
+            });
+
+        }
+
+    </script>
+}

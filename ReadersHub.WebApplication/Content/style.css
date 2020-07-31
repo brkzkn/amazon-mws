@@ -1,0 +1,483 @@
+/* 21st Solutions ~ Havlu Envanter.in */
+
+/* Login Screen */
+body.login,html.login{
+    width:100%;
+    height:100%;
+}
+
+.scrollbar{
+	position:relative;
+	overflow-y:auto;
+	max-height:550px;
+}
+
+a{cursor:pointer;}
+
+.profile-name{
+    background:#707070; 
+    color:#fff; 
+    text-align: center;
+    padding: 1%
+}
+
+.profile-img:hover{
+    text-decoration: none;
+}
+
+.login-container{
+    display: inline-table;
+    vertical-align: middle;
+    position:relative;
+    width: 100%;
+	height:100%;
+	padding: 0;
+}
+
+.login-container .row,.login-container .row .col-md-12{
+	height: 100%;
+	width: 100%;
+	display:table-cell;
+}
+
+.login-container section{
+    padding:20px 20px 10px 20px;
+    border-radius:0 0 4px 4px;
+}
+
+.login-container .logo{
+    width:90%;
+    max-width:120px;
+	display:block;
+}
+
+.login-container .well {
+    height:100%;
+	background-color:white;
+    padding:60px 30px;
+    border:0;
+	margin:0;
+	float:right;
+    box-shadow:0 0 20px rgba(1,1,1,0.5);
+	transition:all 1s;
+}
+
+.login-container .well:hover {
+    box-shadow:0 0 150px rgba(1,1,1,0.5);
+}
+
+.general-information a{
+    display: inline-block;
+    margin:0 1% 1% 0;
+}
+
+#language ~ .btn-group,#language ~ .btn-group button{width:100% !important;}
+#language ~ .btn-group .btn{
+	font-size: 12px;
+	text-align: left;
+}
+
+#language ~ .btn-group b.caret{
+	float: right;
+    margin-top: 6px;
+}
+
+.dropdown.languageSelector{
+	position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.dropdown.languageSelector .dropdown-menu{
+    left: auto;
+	right: 0;
+}
+
+.login-container .well legend {
+    font-size: 26px;
+    text-align: center;
+    font-weight: 300;
+}
+
+.doctype li{
+	margin:10px 0;
+    cursor: pointer;
+}
+
+.doctype ul{
+	list-style-type: lower-alpha;
+}
+
+/* Layout */
+
+body.layout{
+   background: #ededee
+}
+
+body.layout .navbar-brand.imagelogo{
+    padding: 4px 10px
+}
+
+body.layout .navbar-brand.imagelogo img{
+    height:100%
+}
+
+body.layout .navbar-brand{
+    padding: 5px 15px;
+}
+
+
+body.layout .navbar-brand img{
+    height: 38px !important;
+}
+
+body.layout .container .row .well{
+    margin: 0 10px 20px 10px;
+    padding: 19px 40px;
+    display:table;
+    border:0;
+    box-shadow: 0 2px 15px 0 rgba(0,0,0,.1);
+    background-color: white;
+}
+
+body.layout .copyright{
+    padding-top:20px;
+    margin:20px 0 0 0;
+    border-top:1px solid #dddddd;
+}
+
+body.layout .copyright .logo{
+    max-height:40px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    opacity: .3;
+    transition:opacity .3s, grayscale .3s;
+}
+
+body.layout .copyright .logo:hover{
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.borderless td, .borderless th {
+    border: none!important;
+}
+
+.customChck .checkbox{
+    margin-top:0!important;
+}
+
+.text-14{
+    font-size:16px;
+}
+
+label input[type="radio"]{
+    margin-right: 10px;
+    vertical-align: top;
+}
+
+@media (max-width: 992px){
+    body.layout .container .row .well{
+        margin: -20px 0 0 0;
+        padding: 6px 10px;
+        border:0;
+    }
+    
+    body.layout h1, body.layout .h1{
+        font-size:25px;
+    }
+    
+    body.layout h5, body.layout .h5{
+        font-size:12px;
+    }
+
+    .login-container .well {
+		padding:30px 15px;
+		display: table;
+	}
+	.login-container .row,.login-container .row .col-md-12{
+		display:table;
+		margin: 0;
+	}
+}
+
+
+/* General */
+
+.text-align-center{text-align:center !important;}
+.text-align-left{text-align:left !important;}
+.text-align-right{text-align:right !important;}
+.stayline{white-space: nowrap}
+.display-table{display:table !important}
+.display-block{display:block !important}
+.no-margin{margin:0 !important}
+.no-padding{padding:0 !important}
+.width-10{width:10px;}
+.margin-top-10{margin-top:10px;}
+.margin-top-20{margin-top:20px;}
+.margin-top-60{margin-top:60px;}
+.margin-left-20{margin-left:20px;}
+.margin-right-20{margin-right:20px;}
+.margin-bottom-40{margin-bottom:40px;}
+.margin-bottom-20{margin-bottom:20px;}
+.margin-bottom-10{margin-bottom:10px;}
+.full-width{width:100% !important}
+.collapsePanel{cursor:pointer}
+.pullnone{float:none !important; clear:both !important;}
+.color-white{color:white !important;}
+.font-xs{font-size:75%!important}
+.font-sm{font-size:95%!important}
+.font-md{font-size:130%!important}
+.font-lg{font-size:160%!important}
+.font-xl{font-size:200%!important}
+.font-weight-400{font-weight:400 !important}
+.font-weight-700{font-weight:700 !important}
+.cursor-pointer{cursor:pointer;}
+.inline-right-margin{width:97% !important} @media (max-width: 992px){.inline-right-margin{width:100% !important}}
+.no-border,.no-border *{border:0 !important}
+
+.modal-footer {
+    padding: 10px;
+}
+
+.list-group {
+    font-weight: 400;
+}
+
+.nav-tabs>li>a {
+    padding: 5px 10px;
+    font-size: 11px;
+}
+
+label {
+    font-weight: 400;
+}
+
+.tab-content{
+    border-right: 1px solid #DDDDDD;
+    border-left: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
+    padding: 20px 10px 10px 10px;
+}
+
+.custom-header {
+    text-align: right;
+    color: #B3B3B3;
+    font-size: 12px;
+}
+
+.form-control {
+    -webkit-box-shadow: inset 0 0 0;
+    box-shadow: inset 0 0 0;
+}
+
+.multiselect-container input {
+    display: none
+}
+
+.panel .radio label, .panel .checkbox label {
+    min-height: 0;
+}
+
+.btn-circle.btn-xs {
+  border-radius: 100%;
+  width:25px;height:25px;
+  padding:0;
+    
+}.btn-circle.btn-sm {
+    border-radius: 100%;
+    width:30px;height:30px;
+    font-size:14px;
+    padding:0;
+}
+
+.install-status{
+    padding-top:12px;
+}
+
+.excelFile{
+    display: none!important
+}
+
+.clear{
+    clear:both;
+}
+
+table.table thead > tr > th {font-weight:400;vertical-align: middle}
+table.table tfoot > tr > th > input {
+    height: 30px;
+    padding: 8px;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+fieldset.scheduler-border {
+    border: 1px solid #ddd !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    /*margin: 0 0 1.5em 0 !important;*/
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
+legend.scheduler-border {
+    font-size: 1.2em !important;
+    text-align: left !important;
+    width:auto;
+    padding:0 10px;
+    border-bottom:none;
+}
+
+#adminUser_wrapper .col-sm-5{display:none;}
+
+
+button, input, optgroup, select, textarea {
+    font-weight: 400;
+}
+
+table.table thead th{
+    background-color: #008cba;
+    color: white !important;
+}
+
+table.table-bordered tbody th, table.table-bordered tbody td {
+    vertical-align: middle;
+}
+
+#ticketlist tbody tr{
+    cursor:pointer;
+}
+
+.multiselected .btn-group,.multiselected button.multiselect{width:100% !important;}
+
+.close {
+  line-height: 0.8;
+}
+
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  background: red;
+  cursor: inherit;
+  display: block;
+}
+
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+tfoot {
+    display: table-header-group;
+}
+
+table.dataTable tfoot th, table.dataTable tfoot td{
+    border-top: 1px #dddddd solid;
+    border-right: 1px solid #dddddd;
+}
+
+table.dataTable tbody th, table.dataTable tbody td,table.dataTable thead th, table.dataTable thead td{
+    border-right: 1px solid #dddddd;
+}
+
+table.dataTable tbody th:last-child, table.dataTable tbody td:last-child,table.dataTable tfoot th:last-child, table.dataTable tfoot td:last-child,table.dataTable thead th:last-child, table.dataTable thead td:last-child{
+    border-right: 0;
+}
+
+
+table.dataTable thead th, table.dataTable thead td{
+    border-bottom: 0;
+}
+
+.table-menu td,.table-menu td{vertical-align:middle !important}
+.table-menu tbody tr td:first-child .glyphicon{line-height:inherit;}
+.table-menu tfoot tr th:first-child input, table.dataTable thead .sorting_asc:after, .table-menu thead th:first-child:after{
+    display:none !important;
+}
+
+.table-menu thead tr th:first-child{
+    padding-right: 8px;
+}
+
+.table-menu tbody tr td:first-child,.table-menu thead tr th:first-child,.table-menu tfoot tr th:first-child{
+    width:60px;
+    text-align:center;
+}
+
+.nameTh{
+    width:200px!important;
+}
+
+#ticketlist_filter{display:none}
+
+
+/*      *** Validation Style ***        */
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error, textarea.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+input[type='radio'].input-validation-error {
+    outline: 1px solid red;
+}
+
+@media (max-width: 768px){
+    .modal-title {
+        font-size: 14px;
+    }
+    
+    .nav-tabs>li {
+        margin-bottom: 0;
+        width: 100%;
+    }
+    
+    fieldset.scheduler-border {
+        padding: 0 0.4em 0.4em 0.4em !important;
+    }
+
+    .no-padding-xs{
+        padding: 0
+    }
+    body.layout{
+        background:white !important;
+    }
+    .responseTable{position: relative;overflow-x: scroll; width:100%; margin:auto;}
+    .daterangepicker.opensright .ranges, .daterangepicker.opensright .calendar, .daterangepicker.openscenter .ranges, .daterangepicker.openscenter .calendar{float:none}
+    
+    .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {padding: 8px 3px; font-size:11px;}
+    
+    body.layout .copyright .logo{
+        max-height: 35px;
+    }
+    
+    body.layout .copyright {
+        padding-top: 15px;
+        margin: 20px 0 10px 0;
+        border-top: 1px solid #dddddd;
+    }
+	
+	.login-container .logo{
+		width:100%;
+	}
+	
+	@media (max-height: 520px){
+		.login-container .well {background-position:98% 95%;background-size:25%;}
+	}
+	
+}

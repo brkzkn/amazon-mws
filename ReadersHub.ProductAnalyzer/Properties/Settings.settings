@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ReadersHub.ProductAnalyzer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ACCESS_KEY_ID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AKIAJKMXHZJWMNZT24HQ</Value>
+    </Setting>
+    <Setting Name="SECRET_KEY" Type="System.String" Scope="User">
+      <Value Profile="(Default)">seEPq5n+KJM0F9yPlawzAHXHwgnw27xmUdAFuQRs</Value>
+    </Setting>
+    <Setting Name="MWS_DESTINATION" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://mws.amazonservices.co.uk</Value>
+    </Setting>
+    <Setting Name="SELLER_ID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AHKGANS7P4NWZ</Value>
+    </Setting>
+    <Setting Name="MARKETPLACE_ID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">A1F83G8C2ARO7P</Value>
+    </Setting>
+    <Setting Name="FEEDBACK_COUNT" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FEEDBACK_RATING" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SUB_CONDITION" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;New&lt;/string&gt;
+  &lt;string&gt;Used - Like New&lt;/string&gt;
+  &lt;string&gt;Used - Very Good&lt;/string&gt;
+  &lt;string&gt;Used - Good&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
+    </Setting>
+    <Setting Name="REMAINING_TOKEN" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="REQUEST_RESTART_DATE" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>

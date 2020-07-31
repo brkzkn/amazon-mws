@@ -1,0 +1,63 @@
+﻿@using ReadersHub.WebApplication.Core
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Readers-Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href="~/Plugins/alertifyjs/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/Plugins/alertifyjs/css/themes/default.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/skin.css" rel="stylesheet">
+    <link href="~/Content/dataTables.bootstrap.css" rel="stylesheet">
+    <link href="~/Content/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/custom.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="icon" href="~/Images/favicon.ico" />
+    @RenderSection("SubStyle", false)
+</head>
+
+<body class="layout">
+    @{ Html.RenderPartial("_MenuLayout");}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="well col-md-12 col-xs-12">
+                <div id="notification" class="alert alert-danger alert-dismissible" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4></h4>
+                    <div id="content"></div>
+                </div>
+                @if (ViewBag.ShowNotification)
+                {
+                    @Html.GetMessage((NotificationHelper.MessageType)ViewBag.NotificationType, (string)ViewBag.NotificationMessage)
+                }
+                @RenderBody()
+                <footer class="col-md-12 col-xs-12 display-table copyright">
+                    <img src="~/Images/logo.jpg" class="logo pull-right">
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-multiselect.js"></script>
+    <script src="~/Plugins/alertifyjs/alertify.min.js"></script>
+    <script src="~/Plugins/bootbox/bootbox.min.js"></script>
+    <script src="~/Scripts/_21stSolutions.js"></script>
+    @RenderSection("SubScript", required: false)
+</body>
+</html>

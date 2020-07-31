@@ -1,0 +1,101 @@
+/* Template Allianz */ 
+
+body.login{
+	background-color:#2E67A7;
+	background-size:100% 100%;
+	background-image:none;
+	transition:all .5s;
+	position:relative;
+	background-image:url('../Images/background.jpg');
+}
+
+body.login .blurred{
+	background-color:rgb(46, 66, 96);
+	position:absolute;
+	left:0;right:0;bottom:0;top:0;
+}
+
+
+body.layout .navbar-default .navbar-nav>.active>a, body.layout .navbar-default .navbar-nav>.active>a:hover, body.layout .navbar-default .navbar-nav>.active>a:focus, body.layout .navbar-default .navbar-nav>li>a:hover,body.layout .navbar-default .navbar-nav>li>a:focus{
+    background-color:rgba(1,1,1,0.2);
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color:rgba(1,1,1,0.2);
+}
+
+.main-text-color{
+    color:#2E67A7 !important;
+}
+
+.main-bg-color{
+    background-color:#2E67A7 !important;
+}
+
+/* Material Design Ripple Effects @vatanay */
+.btn,.navbar a{
+  position: relative;
+  overflow: hidden;
+  -webkit-transform: translate(0);
+}
+.efekt {
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  transform: scale(0);
+  z-index:9999;
+  background: rgba(255, 255, 255, .2);
+  opacity: 1;
+}
+ 
+.efekt.oynat {
+  -webkit-animation: dalgalanma 2s cubic-bezier(0.165, 0.85, 0.45, 1);
+  -o-animation: dalgalanma 2s cubic-bezier(0.165, 0.85, 0.45, 1);
+  animation: dalgalanma 2s cubic-bezier(0.165, 0.85, 0.45, 1);
+}
+@keyframes dalgalanma {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+  }
+}
+@-webkit-keyframes dalgalanma {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+  }
+}
+@-moz-keyframes dalgalanma {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+  }
+}
+@-ms-keyframes dalgalanma {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+  }
+}
+@-o-keyframes dalgalanma {
+  100% {
+    opacity: 0;
+    -webkit-transform: scale(2);
+    -ms-transform: scale(2);
+    -o-transform: scale(2);
+    transform: scale(2);
+  }
+}

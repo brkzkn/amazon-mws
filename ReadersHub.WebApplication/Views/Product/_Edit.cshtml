@@ -1,0 +1,34 @@
+﻿@using _21stSolution.Extensions;
+@{
+
+}
+@model ReadersHub.WebApplication.Models.ProductViewModel
+
+
+@using (Html.BeginForm("Update", "Product", FormMethod.Post, new { id = "productForm" }))
+{
+    @Html.HiddenFor(m => m.Id)
+
+    if (!Model.ProductName.IsNullOrEmpty())
+    {
+        <section class="margin-bottom-20 no-padding col-md-12 col-xs-12">
+            <h4>@Model.ProductName</h4>
+        </section>
+    }
+
+    <section class="margin-bottom-20 no-padding col-md-6 col-xs-12">
+        <label>ISBN</label>
+        @Html.TextBoxFor(x => x.Isbn, new { @type = "text", @class = "form-control input-sm inline-right-margin", @placeholder = "ISBN" })
+    </section>
+
+    <section class="margin-bottom-20 no-padding col-md-6 col-xs-12">
+        <label>ASIN</label>
+        @Html.TextBoxFor(x => x.Asin, new { @type = "text", @class = "form-control input-sm inline-right-margin", @placeholder = "ASIN" })
+    </section>
+}
+
+<script type="text/javascript">
+
+
+
+</script>

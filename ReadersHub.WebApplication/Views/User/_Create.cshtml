@@ -1,0 +1,69 @@
+﻿@{
+
+}
+@model ReadersHub.WebApplication.Models.UserViewModel
+
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { id = "userForm" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.HiddenFor(m => m.IsEdit)
+
+    <section class="margin-bottom-20 no-padding col-md-4 col-xs-12">
+        <label >Kullanıcı Adı</label>
+        @Html.TextBoxFor(x => x.UserName, new { @type = "text", @class = "form-control input-sm inline-right-margin", @placeholder = "Kullanıcı adı giriniz" })
+    </section>
+
+    <section class="margin-bottom-20 no-padding col-md-4 col-xs-12">
+        <label >Ad Soyad</label>
+        @Html.TextBoxFor(x => x.FullName, new { @type = "text", @class = "form-control input-sm inline-right-margin", @placeholder = "Ad soyad giriniz" })
+    </section>
+
+    <section class="margin-bottom-20 no-padding col-md-4 col-xs-12">
+        <label >E-mail</label>
+        @Html.TextBoxFor(x => x.Email, new { @type = "text", @class = "form-control input-sm inline-right-margin", @placeholder = "E-posta adresi giriniz" })
+    </section>
+
+
+    <section class="margin-bottom-20 no-padding col-md-4 col-xs-12">
+        <label >Şifre</label>
+        @Html.PasswordFor(x => x.Password, new { @type = "password", @class = "form-control input-sm inline-right-margin", @placeholder = "Şifre giriniz" })
+    </section>
+
+    <section class="margin-bottom-20 no-padding col-md-4 col-xs-12">
+        <label >Şifre</label>
+        @Html.PasswordFor(x => x.PasswordAgain, new { @type = "password", @class = "form-control input-sm inline-right-margin", @placeholder = "Şifrenizi tekrar giriniz" })
+    </section>
+
+    <section class="margin-bottom-20 display-table full-width">
+        <label for="userRoles">Yetkilendirme</label>
+        <!-- Dokümantasyon : http://www.jqueryrain.com/?c6ebuEZT -->
+        <select class="form-control" id="Roles" multiple required>
+            <option value="@ReadersHub.Common.Constants.Permissions.User">Kullanıcılar</option>
+            <option value="@ReadersHub.Common.Constants.Permissions.Criterion">Kriterler</option>
+            <option value="@ReadersHub.Common.Constants.Permissions.Product">Ürünler</option>
+        </select>
+    </section>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#bs-example-navbar-collapse-1").load("menubar.html");
+        $('[data-toggle="tooltip"]').tooltip();
+
+        $('#Roles').multiSelect({
+            selectableHeader: "<div class='custom-header'>Tüm Ekranlar</div>",
+            selectionHeader: "<div class='custom-header'>Girebileceği Ekranlar</div>",
+        });
+        var selectedCountries = [];
+        @foreach (var d in Model.Roles)
+        {
+            @:selectedCountries.push("@d");
+        }
+
+        $('#Roles').multiSelect('select', selectedCountries);
+
+    });
+
+
+</script>

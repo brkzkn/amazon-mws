@@ -1,0 +1,20 @@
+﻿As stated above, ASINs themselves are not specific to a seller.
+
+However, if you go to a seller’s storefront page within Amazon, then look at one of their items, the URL is modified to filter only on that particular seller’s offer.
+In this way you can get a URL for an ASIN that always shows only your offer.
+
+Storefront URL:
+https://www.amazon.com/s?marketplaceID=ATVPDKIKX0DER&merchant=SellerId27
+*replace ‘SellerId’ with your SellerId
+*ATVPDKIKX0DER = US marketplace, you will also need to change this value if you wish to view a storefront in another marketplace or region.
+
+Seller specific ASIN URL:
+http://www.amazon.com/gp/product/ASIN?m=SellerID34
+*replace ‘ASIN’ with your ASIN, and ‘SellerID’ with your SellerId
+
+Example:
+http://www.amazon.com/dp/B00125Q75Y42
+This product has multiple variations and dozens of sellers with available offers.
+
+But if you filter it through the lens of one specific seller’s storefront, you now see only that seller’s offer.
+http://www.amazon.com/gp/product/B00125Q75Y?m=A2QCV0YH07CCLS25

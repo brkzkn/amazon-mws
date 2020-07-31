@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section SubStyle{
+    <link href="~/Plugins/jQuery-Tags-Input/jquery.tagsinput.min.css" rel="stylesheet" />
+}
+@model ReadersHub.WebApplication.Models.CriterionViewModel
+<h1>Kriterler</h1>
+<h5 class="text-muted">Readers-Hub kriterlerini bu ekran üzerinden yönetebilirsiniz.</h5>
+<hr>
+<div class="margin-bottom-10">
+    <form class="form-inline">
+        @Html.DropDownListFor(x => x.StoreId, Model.StoreList, "Mağaza Seçiniz", new { @class = "form-control" })
+        <button id="storeSubmit" type="button" class="btn btn-primary">Seç</button>
+    </form>
+</div>
+<div id="criterionDiv">
+
+</div>
+
+@section SubScript{
+    <script src="~/Plugins/jQuery-Tags-Input/jquery.tagsinput.min.js"></script>
+    <script>
+
+        $("#storeSubmit").click(function () {
+            var storeId = $("#StoreId").val();
+            _21stSolution.Notification.Clear();
+            if (storeId) {
+                $.ajax({
+                    type: "GET",
+                    data: { storeId: storeId },
+                    url: "@Url.Action("GetCriterion", "Criterion")",
+                    datatype: "html",
+                    success: function (data) {
+                        $('#criterionDiv').html(data);
+                    },
+                    error: function () {
+                    }
+                });
+            }
+            else {
+                alert("Lütfen mağaza seçiniz");
+                //_21stSolution.Messaging.ShowError("Lütfen mağaza seçiniz");
+            }
+        });
+
+    </script>
+}

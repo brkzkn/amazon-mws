@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5f80b63301a84f5192ee539a3d92b569" Name="Diagram1">
+        <EntityTypeShape EntityType="ReadersHubModel.Criterion" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.Feed_Temp" Width="1.5" PointX="5.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.Product" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.Product_Price" Width="1.5" PointX="6" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.Store" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.User_Role" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ReadersHubModel.Users" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="ReadersHubModel.FK_Criterion_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadersHubModel.FK_Product_Price_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadersHubModel.FK_Product_Price_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="ReadersHubModel.FK_User_Role_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

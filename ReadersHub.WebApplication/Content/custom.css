@@ -1,0 +1,18 @@
+﻿
+/*      *** Validation Style ***        */
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error, textarea.input-validation-error, select.input-validation-error {
+    border: 1px solid #f00 !important;
+    background-color: #fee;
+}
+
+input[type='radio'].input-validation-error {
+    outline: 1px solid red;
+}

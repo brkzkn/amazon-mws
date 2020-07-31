@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1>Kullanıcı İşlemleri</h1>
+<h5 class="text-muted">Kullanıcı işlemlerinizi bu ekrandan yönetebilirsiniz..</h5>
+<hr />
+<button class="btn btn-primary btn-sm margin-bottom-20" data-toggle="modal" onclick="AddUser(0); return false;"><i class="fa fa-plus"></i> Yeni Kullanıcı</button>
+<div class="pullnone clearfix"></div>
+<div class="panel panel-default">
+    <div class="panel-heading">Tanımlanmış Kullanıcılar</div>
+
+    <div class="panel-body">
+        <div id="divGrid">
+            @{Html.RenderPartial("_Grid"); }
+        </div>
+    </div>
+</div>
+
+@Popup.Create(new ReadersHub.WebApplication.App_Code.PopupInitialize()
+{
+    ModalSize = "modal-lg",
+    Id = "addUser",
+    Title = "Kullanıcı Ekle",
+    AddButton = "Ekle",
+    OnClick = "InsertUser(this); return false;"
+})
+
+
+<!-- Permission & Role Match -->
+
+
+@section SubScript{
+    <script src="~/Plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/Plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //$("#bs-example-navbar-collapse-1").load("menubar.html");
+            $('[data-toggle="tooltip"]').tooltip();
+
+            $('#userRoles').multiSelect({
+                selectableHeader: "<div class='custom-header'>Tüm Ekranlar</div>",
+                selectionHeader: "<div class='custom-header'>Girebileceği Ekranlar</div>",
+            });
+
+            var columnDef = [
+                {
+                    "targets": 0,
+                    "data": "UserName",
+                },
+                {
+                    "targets": 1,
+                    "data": "FullName",
+                },
+                {
+                    "targets": 2,
+                    "data": "EmailAddress",
+                },
+                {
+                    "targets": 3,
+                    "data": "RegisteredDateString",
+                    "searchable": false,
+                },
+                {
+                    "targets": 4,
+                    "data": "Roles",
+                    "searchable": false,
+                },
+                {
+                    "aTargets": -1,
+                    "data": "Id",
+                    "searchable": false,
+                    "mRender": function (data, type, full) {
+                        return '<div style="text-align:center;"> ' +
+                            '<button type="button" onclick="Edit(' + data + '); return false;"; class="btn btn-circle btn-xs" data-toggle="modal" data-placement="left" title="Düzenle"><i class="fa fa-pencil"></i></button> ' +
+                            '<button type="button" onclick="Delete(' + data + '); return false;"; class="btn btn-circle btn-danger btn-xs tooltipActive" data-toggle="tooltip" data-placement="left" title="" data-original-title="Sil"><i class="fa fa-times"></i></button> ' +
+                            '</div>';
+                    }
+                }
+            ];
+
+            var gridSettings = {
+                "aoColumnDefs": columnDef,
+                bFilter: true,
+                "drawCallback": function (settings, json) {
+                    console.log('drawCallback');
+                }
+            };
+
+            _21stSolution.Grid.Render('adminUser', '@Url.Action("GetList")', OnError, gridSettings);
+
+            function OnError(eInfo) {
+                _21stSolution.Notification.ShowErrorMessage('notification', eInfo.responseJSON.Message);
+            }
+
+
+        });
+
+        function AddUser(userId) {
+            var $modal = $('#addUser');
+
+            $.ajax({
+                type: "GET",
+                data: { userId: userId },
+                url: "@Url.Action("AddUser", "User")",
+                datatype: "html",
+                success: function (data) {
+                    $modal.find('.modal-body').html(data);
+                    $modal.modal('show');
+                },
+                error: function () {
+                    $modal.find('.modal-body').html('Veri yüklenemedi');
+                    $modal.modal('show');
+                }
+            });
+        }
+
+        function InsertUser(e) {
+            var url = '@Url.Action("Create")';
+            PostForm(url, 'userForm');
+        }
+
+        function PostForm(url, form) {
+            var $form;
+
+            if (form != null && form.selector == "form") {
+                $form = form;
+            }
+            else {
+                $form = $('#userForm');
+            }
+
+            if (!$form.valid()) {
+                return false;
+            }
+
+            var data = _21stSolution.GetFormPostJsonDataFromControl($form);
+            _21stSolution.Notification.Clear('notification');
+
+
+            _21stSolution.core.ajax.post(url, {
+                data: data,
+                success: function (resultObj) {
+                    if (resultObj.RedirectUrl != null && resultObj.RedirectUrl.length > 0) {
+                        window.location.href = resultObj.RedirectUrl;
+                    }
+                    if (resultObj.Message != null) {
+                        _21stSolution.Notification.ShowSuccessMessage('notification', resultObj.Message);
+                    }
+
+
+                },
+                error: function (resultObj) {
+                    if (resultObj.Message != null) {
+                        _21stSolution.Notification.ShowErrorMessage('notification', resultObj.Message);
+                    }
+                },
+                preventDefaultSuccess: true,
+                preventDefaultError: true,
+            });
+
+            var $modal = $('#addUser');
+            $modal.modal('toggle');
+
+            return false;
+        }
+
+        function Edit(id) {
+            AddUser(id);
+        }
+
+    </script>
+}

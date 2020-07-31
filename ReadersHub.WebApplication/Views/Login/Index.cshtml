@@ -1,0 +1,84 @@
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    var loginSubmitUrl = Url.Action("DoLogin", "Login");
+    var mainPage = Url.Action("Index", "Product");
+}
+@model ReadersHub.WebApplication.Models.LoginViewModel
+
+<div class="container login-container">
+    <div class="row" style="height:100%;">
+        <div class="col-md-12 no-padding" style="height:100%;">
+
+            <div class="well col-md-3 col-sm-4 col-xs-12">
+                @using (Ajax.BeginForm("DoLogin", "Login", new AjaxOptions { HttpMethod = "POST" }, new { id = "loginForm", @class = "form-login" }))
+                {
+                    <section>
+                        <div id="notification" style="display:none" class="alert alert-danger" role="alert">adasdda</div>
+
+                        <img src="~/Images/logo.jpg" class="logo margin-bottom-40">
+                        <small class="margin-bottom-20 display-block">Hesabınıza erişmek için giriş yapınız</small>
+                        @Html.PasswordFor(x => x.UsernameOrEmailAddress, new { @placeholder = "Kullanıcı adı", @type = "text", @class = "display-block input-sm margin-bottom-10 full-width" })
+                        @Html.PasswordFor(x => x.Password, new { @placeholder = "Şifre", @type = "password", @class = "display-block input-sm margin-bottom-10 full-width" })
+                        @*<div class="checkbox">
+                            @Html.CheckBoxFor(x => x.RememberMe)
+                            @Html.LabelFor(x => x.RememberMe)
+                        </div>*@
+                        <button id="submitBtn" type="submit" class="btn btn-sm btn-primary margin-bottom-10"><i class="fa fa-key"></i> Giriş Yap</button>
+                    </section>
+                }
+            </div>
+        </div>
+    </div>
+    <span class="blurred"></span>
+</div>
+
+
+
+@section SubScript{
+    <script type="text/javascript">
+        //$(function () {
+        //    $('input').iCheck({
+        //        checkboxClass: 'icheckbox_square-blue',
+        //        radioClass: 'iradio_square-blue',
+        //        increaseArea: '20%' // optional
+        //    });
+        //});
+
+        $(document).ready(function () {
+
+            $("#submitBtn").click(function (e) {
+                e.preventDefault();
+                var $form = $("#loginForm");
+
+                if (!$form.valid()) {
+                    return false;
+                }
+
+                $("#notification").css("display", "none");
+                var data = _21stSolution.GetFormPostJsonDataFromControl($form);
+                _21stSolution.TopWin._21stSolution.Window.ShowLoading();
+                _21stSolution.core.ajax.post("@loginSubmitUrl", {
+                    data: data,
+                    success: function (resultObj, textStatus, jqXhr) {
+
+                        if (resultObj.RedirectUrl) {
+                            window.location = resultObj.RedirectUrl;
+                        } else {
+                            window.location = "@mainPage";
+                        }
+                    },
+                    error: function (resultObj) {
+                        if (resultObj.Message) {
+                            $("#notification").css("display", "block");
+                            $("#notification").html(resultObj.Message);
+                        }
+                    },
+                    preventDefaultSuccess: true,
+                    preventDefaultError: true,
+                });
+
+                return false;
+            });
+        });
+    </script>
+}
